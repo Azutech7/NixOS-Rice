@@ -26,6 +26,8 @@ imports = [ inputs.den.flakeModule ];
 			  wayland.windowManager.hyprland = {
 			    enable = true;
 			    xwayland.enable = true;
+
+				configType = "hyprlang";
 			
 			    package = null;
 			    portalPackage = null;
