@@ -4,6 +4,16 @@ imports = [ inputs.den.flakeModule ];
 
 	den.aspects.theme = {
 
+		nixos = { config, pkgs, ... }:
+			let
+				cfg = config.modules.theme;
+			in
+			{
+				fonts.fontconfig.enable = true;
+
+				fonts.packages = with pkgs; []; #TODO, make system-level theme module
+			}
+
 		homeManager = { config, pkgs, ... }: 
 			let
 				cfg = config.modules.theme;
@@ -99,6 +109,12 @@ imports = [ inputs.den.flakeModule ];
 					};
 					
 				};
+
+				fonts.fontconfig.enable = true;
+
+				home.packages = with pkgs; [
+					cfg.font.package;
+				];
 		};
 	};
 }
