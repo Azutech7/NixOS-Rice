@@ -46,30 +46,6 @@ imports = [ inputs.den.flakeModule ];
 				#zoom-us
 				#prismlauncher
 			];
-
-			home.sessionVariables = {
-				XCURSOR_THEME = config.modules.theme.cursor.name;
-				XCURSOR_SIZE = config.modules.theme.cursor.size;
-				HYPRCURSOR_THEME = config.modules.theme.cursor.name;
-				HYPRCURSOR_SIZE = config.modules.theme.cursor.size;
-			};
-
-			home.pointerCursor = {
-				package = config.modules.theme.cursor.package;
-				name = config.modules.theme.cursor.name;
-				size = config.modules.theme.cursor.size;
-				gtk.enable = true;
-				x11.enable = true;
-			};
-
-			gtk = {
-				enable = true;
-				cursorTheme = {
-					package = config.modules.theme.cursor.package;
-					name = config.modules.theme.cursor.name;
-				};
-				gtk4.theme = null;
-			};
 				
 			
 			programs.git.enable = true;
