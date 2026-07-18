@@ -115,6 +115,30 @@ imports = [ inputs.den.flakeModule ];
 				home.packages = with pkgs; [
 					cfg.font.package;
 				];
+
+				home.sessionVariables = {
+					XCURSOR_THEME = cfg.cursor.name;
+					XCURSOR_SIZE = cfg.cursor.size;
+					HYPRCURSOR_THEME = cfg.cursor.name;
+					HYPRCURSOR_SIZE = cfg.cursor.size;
+				};
+	
+				home.pointerCursor = {
+					package = cfg.cursor.package;
+					name = cfg.cursor.name;
+					size = cfg.cursor.size;
+					gtk.enable = true;
+					x11.enable = true;
+				};
+	
+				gtk = {
+					enable = true;
+					cursorTheme = {
+						package = cfg.cursor.package;
+						name = cfg.cursor.name;
+					};
+					gtk4.theme = null;
+				};
 		};
 	};
 }
