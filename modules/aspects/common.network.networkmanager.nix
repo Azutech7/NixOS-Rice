@@ -7,7 +7,8 @@ imports = [ inputs.den.flakeModule ];
 			networking = {
 				networkmanager = {
 					enable = true;
-					wifi.macAddress = "keep";
+					wifi.macAddress = "random";
+					wifi.scanMacAddress = "random";
 				};
 			};
 		};
