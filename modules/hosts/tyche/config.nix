@@ -1,7 +1,7 @@
 { inputs, den, pkgs, lib, host, ... }: {
 	imports = [ inputs.den.flakeModule ];
 
-	den.aspects.tyche = {
+	den.hosts.x86_64-linux.tyche = {
 
 		includes = [
 			(den.aspects.common._.storage._.disko._.mkPrimaryDrive { 
@@ -30,6 +30,9 @@
 			den.aspects.ly
 		];
 
+		users = {
+			azutech = {};
+		};
 
 		environment.systemPackages = with pkgs; [
 				wget

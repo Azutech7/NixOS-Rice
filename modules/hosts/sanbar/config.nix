@@ -1,7 +1,7 @@
 { inputs, den, pkgs, lib, host, ... }: {
 	imports = [ inputs.den.flakeModule ];
 
-	den.aspects.sanbar = {
+	den.hosts.x86_64-linux.sanbar = {
 
 		includes = [
 			(den.aspects.common._.storage._.disko._.mkPrimaryDrive { 
@@ -31,6 +31,9 @@
 			den.aspects.ly
 		];
 
+		users = {
+			azutech = {};
+		};
 
 		environment.systemPackages = with pkgs; [
 				wget

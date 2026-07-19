@@ -1,7 +1,7 @@
 { inputs, den, pkgs, lib, host, ... }: {
 	imports = [ inputs.den.flakeModule ];
 
-	den.aspects.atlas = {
+	den.hosts.x86_64-linux.atlas = {
 
 		includes = [
 			(den.aspects.common._.storage._.disko._.mkPrimaryDrive { 
@@ -24,6 +24,10 @@
 			den.aspects.common._.storage._.nixpkgs
 			den.aspects.common._.storage._.space-optimization
 		];
+
+		users = {
+			server-manager = {};
+		};
 
 
 		environment.systemPackages = with pkgs; [
