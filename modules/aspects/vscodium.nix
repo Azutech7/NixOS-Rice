@@ -1,0 +1,20 @@
+{ inputs, den, pkgs, lib, host, user, ... }: {
+
+imports = [ inputs.den.flakeModule ];
+
+    den.aspects.vscodium = {
+        nixos = { pkgs, ... }: {
+
+            programs.vscode = {
+                enable = true;
+                package = pkgs.vscodium;
+
+                profiles.default.extensions = with pkgs.vscode-extensions; [
+                    jnoortheen.nix-ide
+                    jeanp413.open-remote-ssh
+                ];
+            };
+
+        };
+    };
+}
