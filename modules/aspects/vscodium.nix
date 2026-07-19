@@ -3,7 +3,7 @@
 imports = [ inputs.den.flakeModule ];
 
     den.aspects.vscodium = {
-        nixos = { pkgs, ... }: {
+        homeManager = { pkgs, ... }: {
 
             programs.vscode = {
                 enable = true;
