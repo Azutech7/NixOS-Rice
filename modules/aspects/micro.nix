@@ -4,6 +4,28 @@ imports = [ inputs.den.flakeModule ];
 
 	den.aspects.micro = {
 
+		nixos = { config, lib, pkgs, ... }: {
+			programs.micro = {
+				enable = true;
+
+				settings = {
+					autoindent = true;
+					autosave = 0;
+					autosu = false;
+					backup = true;
+					cursorline = false;
+					truecolor = "on";
+					colorscheme = "micro-theme";
+				#	fakecursor = true;
+				};
+			}
+
+			environment.sessionVariables = {
+				EDITOR = "micro";
+				VISUAL = "micro";
+			};
+		}
+
 		homeManager = { config, lib, pkgs, ... }:
 			let
 				c = config.modules.theme.color;

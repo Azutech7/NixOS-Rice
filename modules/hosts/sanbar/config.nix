@@ -78,23 +78,7 @@
 				cacert
 				openssl
 			];
-
-
-			fonts.packages = with pkgs; [
-				maple-mono.truetype
-				maple-mono.NF-unhinted
-			];
-
-			fonts.fontconfig.defaultFonts = {
-				serif = [ "Maple Mono" ];
-				sansSerif = [ "Maple Mono" ];
-				monospace = [ "Maple Mono" ];
-			};
-
-			environment.sessionVariables = {
-				EDITOR = "micro";
-				VISUAL = "micro";
-			};
+			
 
 	};
 }
