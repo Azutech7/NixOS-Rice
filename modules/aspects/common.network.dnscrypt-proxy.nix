@@ -2,7 +2,7 @@
 
 imports = [ inputs.den.flakeModule ];
 
-	den.aspects.common.provides.network.provides.dnscrypt = {
+	den.aspects.common.provides.network.provides.dnscrypt-proxy = {
 		nixos = { ... }: {
 
 			services.dnscrypt-proxy = {
@@ -11,16 +11,20 @@ imports = [ inputs.den.flakeModule ];
 				  
 				    server_names = [ "cloudflare" "quad9-dnscrypt-main" ];
 				    
-				    listen_addresses = [ "127.0.0.1:53" ];
+				    listen_addresses = [ "127.0.0.1:5353" ];
+
 				    require_dnssec = true;
+					require_nofilter = false;
 				    require_nolog = true;
+
+					ipv6_servers = false;
 				  };
 				};
 
 			networking = {
-				nameservers = [ "127.0.0.1" ];
+				nameservers = lib.mkForce [ "127.0.0.1" ];
+
 				networkmanager = {
-					enable = true;
 					dns = "none";
 				};
 			};

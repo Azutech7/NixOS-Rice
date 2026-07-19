@@ -15,8 +15,9 @@
 			den.aspects.common._.home-manager._.backup
 			den.aspects.common._.network._.avahi
 			den.aspects.common._.network._.bluetooth
-			den.aspects.common._.network._.dnssec
+			den.aspects.common._.network._.unbound
 			den.aspects.common._.network._.firewall
+			den.aspects.common._.network._.dnscrypt-proxy
 			den.aspects.common._.network._.networkmanager
 			den.aspects.common._.network._.openssh
 			den.aspects.common._.security._.gnupg

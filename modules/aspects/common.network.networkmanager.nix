@@ -10,6 +10,9 @@ imports = [ inputs.den.flakeModule ];
 					wifi.macAddress = "random";
 					wifi.scanMacAddress = "random";
 				};
+
+				enableIPv6 = false;
+				preferIPv4 = true;
 			};
 		};
 	};

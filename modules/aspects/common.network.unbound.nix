@@ -1,0 +1,40 @@
+{ inputs, den, pkgs, lib, host, ... }: {
+
+imports = [ inputs.den.flakeModule ];
+
+	den.aspects.common.provides.network.provides.unbound = {
+		nixos = { ... }: {
+
+			services.unbound = {
+				enable = true;
+				enableRootTrustAnchor = true;
+				settings = {
+					server = {
+						interface = [ "127.0.0.1" ];
+						port = 53;
+						access-control = [ "127.0.0.0/8 allow" ];
+						
+						do-ip4 = true;
+						do-ip6 = false;
+
+						prefetch = true;
+
+						harden-dnssec-stripped = true;
+						qname-minimisation-strict = true;
+					};
+				};
+			};
+			
+			networking = {
+				nameservers = lib.mkForce [ "127.0.0.1" ];
+
+				networkmanager = {
+					dns = "none";
+				};
+			};
+
+			services.resolved.enable = lib.mkForce false;
+
+		};
+	};
+}

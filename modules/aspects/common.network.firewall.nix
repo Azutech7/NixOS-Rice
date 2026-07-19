@@ -7,10 +7,13 @@ imports = [ inputs.den.flakeModule ];
 			networking.firewall = {
 				enable = true;
 				
-				allowedUDPPorts = [ 53 88 500 3544 4500 ];
-				allowedTCPPorts = [ 53 80 3074 ];
+				allowedUDPPorts = [];
+				allowedTCPPorts = [];
 				
 				extraCommands = "iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT";
+
+				checkReversePath = "strict";
+				allowPing = false; 
 			};
 		};
 	};
