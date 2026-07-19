@@ -9,8 +9,6 @@ imports = [ inputs.den.flakeModule ];
 				
 				allowedUDPPorts = [];
 				allowedTCPPorts = [];
-				
-				extraCommands = "iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT";
 
 				checkReversePath = "strict";
 				allowPing = false; 
