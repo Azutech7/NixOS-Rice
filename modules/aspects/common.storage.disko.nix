@@ -11,25 +11,25 @@
 
 		nixos = { ... }: {
 			imports = [
-			  # Safely fall back to an empty module if disko isn't written to the flake yet
 			  inputs.disko.nixosModules.disko
 			];
 
-			disko.enableConfig = true;
+			#disko.enableConfig = true;
 		};
 
 		provides.mkPrimaryDrive = {
 
-			includes = [ den.aspects.common._.storage._.disko ];
+			#includes = [ den.aspects.common._.storage._.disko ];
 
 			__functor = self: { devicePath, ... }: { #### devicePath: /dev/disk/by-id/<ID>
 
 				nixos = { host, ... }: {
 
-					#imports = [
-					#	# Safely fall back to an empty module if disko isn't written to the flake yet
-					#	(inputs.disko.nixosModules.disko or { })
-					#];
+					imports = [
+						inputs.disko.nixosModules.disko
+					];
+
+					disko.enableConfig = true; 
 
 					disko.devices = {
 					    disk = {
