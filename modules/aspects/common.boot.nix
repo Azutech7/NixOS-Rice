@@ -37,6 +37,8 @@
 						editor = false;
 						configurationLimit = 5;
 					};
+
+					grub.enable = false;
 				};
 
 				initrd = {

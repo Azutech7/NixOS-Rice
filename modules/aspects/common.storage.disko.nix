@@ -19,11 +19,13 @@
 
 		provides.mkPrimaryDrive = {
 
-			#includes = [ den.aspects.common._.storage._.disko ];
+			####includes = [ den.aspects.common._.storage._.disko ];
 
-			__functor = self: { devicePath, ... }: { #### devicePath: /dev/disk/by-id/<ID>
+			#__functor = self: { devicePath, ... }: { #### devicePath: /dev/disk/by-id/<ID>
 
-				nixos = { host, ... }: {
+				#nixos = { host, ... }: {
+			
+			__functor = self: { devicePath, ... }: { host, ... }: {
 
 					imports = [
 						inputs.disko.nixosModules.disko
@@ -111,5 +113,6 @@
 		};
 
 	};
-}
+};
+}; #fix later
 
