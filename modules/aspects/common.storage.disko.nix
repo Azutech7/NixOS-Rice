@@ -28,7 +28,7 @@
 					disko.devices = {
 					    disk = {
 					    
-					      "${host.hostName}_disko_disk" = {
+					      primary-drive = {
 					        type = "disk";
 					        device = devicePath;
 					        content = {
@@ -48,7 +48,7 @@
 					              };
 					            };
 					            
-					            "${host.hostName}_disko_part" = {
+					            root-volume = {
 					              size = "100%";
 					              content = {
 					                type = "btrfs";
