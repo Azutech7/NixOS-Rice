@@ -96,13 +96,15 @@
 					  };
 				};
 
+				flake.nixosConfigurations."${host.hostName}".disko.devices = flake.diskoConfigurations."${host.hostName}".disko.devices;
+
 				# Now point your NixOS target module directly back to the flake configuration
-				nixos = { config, host, ... }: {
-					disko.enableConfig = true;
-					
-					# Read the layout definitions dynamically from the flake scope we built above
-					disko.devices = config.diskoConfigurations."${host.hostName}".disko.devices;
-				};
+				#nixos = { config, host, ... }: {
+				#	disko.enableConfig = true;
+				#	
+				#	# Read the layout definitions dynamically from the flake scope we built above
+				#	disko.devices = config.diskoConfigurations."${host.hostName}".disko.devices;
+				#};
 			};
 		};
 	};
