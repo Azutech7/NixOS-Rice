@@ -12,7 +12,7 @@
 		nixos = { ... }: {
 			imports = [
 			  # Safely fall back to an empty module if disko isn't written to the flake yet
-			  (inputs.disko.nixosModules.disko or { })
+			  inputs.disko.nixosModules.disko
 			];
 
 			disko.enableConfig = true;
