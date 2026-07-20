@@ -1,15 +1,14 @@
 { inputs, den, pkgs, lib, host, config, ... }: {
 
-	imports = [ inputs.den.flakeModule ];
+	imports = [ 
+		inputs.den.flakeModule
+		inputs.disko.flakeModules.default
+	];
 
 	flake-file.inputs.disko = {
 		url = "github:nix-community/disko";
 		inputs.nixpkgs.follows = "nixpkgs";
 	};
-
-	# FIX: Inject the mapping into the flake output from inside the aspect!
-	# This avoids touching flake.nix while making diskoConfigurations universally visible.
-	flake.diskoConfigurations = lib.mapAttrs (name: hostConf: hostConf.config.disko.devices) den.hosts.x86_64-linux;
 
 	den.aspects.common.provides.storage.provides.disko = {
 
@@ -17,6 +16,7 @@
 			imports = [
 			  inputs.disko.nixosModules.disko
 			];
+
 			disko.enableConfig = true;
 		};
 
@@ -29,6 +29,8 @@
 				nixos = { host, ... }: {
 
 					disko.enableConfig = true;
+
+					flake.diskoConfigurations."${host.hostName}".disko.devices = config.disko.devices;
 
 					disko.devices = {
 					    disk = {
