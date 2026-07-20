@@ -19,13 +19,10 @@
 
 			####includes = [ den.aspects.common._.storage._.disko ];
 
-			#__functor = self: { devicePath, ... }: { #### devicePath: /dev/disk/by-id/<ID>
+			__functor = self: { devicePath, ... }: { #### devicePath: /dev/disk/by-id/<ID>
 
-				#nixos = { host, ... }: {
+				nixos = { host, ... }: {
 			
-			__functor = self: { devicePath, ... }: { host, ... }: {
-
-
 					disko.enableConfig = true; 
 
 					disko.devices = {
@@ -107,4 +104,5 @@
 
 		};
 
-	}
+	};
+}
