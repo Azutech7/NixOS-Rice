@@ -1,7 +1,9 @@
 { inputs, den, lib, config, ... }: {
 
-    den.default.includes = [ { nixos = { ... }: { system.stateVersion = "25.11"; }; } ];
-	den.default.includes = [ den.batteries.hostname ];
+	den.default.includes = [
+		den.batteries.hostname
+		{ nixos = { ... }: { system.stateVersion = "25.11"; }; }
+	];
 
     den.schema.host = host: {
 
