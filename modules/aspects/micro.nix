@@ -18,13 +18,13 @@ imports = [ inputs.den.flakeModule ];
 					colorscheme = "micro-theme";
 				#	fakecursor = true;
 				};
-			}
+			};
 
 			environment.sessionVariables = {
 				EDITOR = "micro";
 				VISUAL = "micro";
 			};
-		}
+		};
 
 		homeManager = { config, lib, pkgs, ... }:
 			let
@@ -103,21 +103,6 @@ imports = [ inputs.den.flakeModule ];
 			color-link tab-error              "#${c.background},#${c.error}"
 			color-link trailingws             "#${c.background},#${c.error}"
 				'';
-				
-				home.activation = {
-				  installMicroPlugins = lib.hm.dag.entryAfter ["writeBoundary"] ''
-				    if [ ! -d "${config.xdg.configHome}/micro/plugins/filemanager" ]; then
-				      echo "Installing micro filemanager plugin..."
-				      #${pkgs.micro}/bin/micro -plugin install filemanager
-			
-				      
-				    fi
-				  '';
-				};
-			
-				xdg.configFile."micro/bindings.json".text = builtins.toJSON {
-				  "Ctrl-g" = "lua:filemanager.toggle_tree";
-				};
 			};
 		
 	};
