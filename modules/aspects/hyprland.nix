@@ -4,11 +4,13 @@ imports = [ inputs.den.flakeModule ];
 
 	den.aspects.hyprland = {
 	
-		nixos = { ... }: {
+		nixos = { pkgs, ... }: {
 			programs.hyprland = {
 				enable = true;
 				xwayland.enable = true;
 			};
+
+
 
 			services.xserver.enable = true;
 			services.xserver.xkb.layout = "us";

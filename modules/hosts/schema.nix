@@ -1,13 +1,11 @@
 { inputs, den, lib, config, ... }: {
 
-    den.default.nixos.home.stateVersion = "25.11";
+    den.default.system.stateVersion = "25.11";
+	den.default.includes = [ den.batteries.hostname ];
 
     den.schema.host = host: {
-		includes = [
-			den.provides.hostname
-		];
 
-		nixos = { ... }: {
+		nixos = { lib, inputs, ... }: {
 			den.nixpkgs = {
 				source = inputs.nixpkgs;
 				system = host.system; # Maps "x86_64-linux" directly

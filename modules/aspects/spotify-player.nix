@@ -59,10 +59,6 @@ imports = [ inputs.den.flakeModule ];
 
             };
 
-            services.spotify-player = {
-                enable = true;
-            };
-
         };
     };
 }
