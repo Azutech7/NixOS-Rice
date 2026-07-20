@@ -6,8 +6,6 @@
 	  (inputs.flake-file.flakeModules.dendritic or { })
 	  (inputs.den.flakeModules.dendritic or { })
 	];
-
-	nix.settings.experimental-features = [ "nix-command" "flakes" ];
 	
 	flake-file.inputs = {
 	  den.url = "github:denful/den";
