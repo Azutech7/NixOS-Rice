@@ -2,7 +2,7 @@
 
 imports = [ inputs.den.flakeModule ];
 
-    den.aspects.spotify = {
+    den.aspects.spotify-player = {
         homeManager = { pkgs, ... }: {
             
             programs.spotify-player = {

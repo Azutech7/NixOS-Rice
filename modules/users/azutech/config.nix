@@ -29,7 +29,9 @@ imports = [ inputs.den.flakeModule ];
 
 			den.aspects.theme._.selenized
 
-			#(den.batteries.unfree [ "discord-1.0.138" ])
+			den.aspects.vesktop
+			den.aspects.vscodium
+			den.aspects.spotify-player
 		];
 
 		nixos = { pkgs, ... }: {
