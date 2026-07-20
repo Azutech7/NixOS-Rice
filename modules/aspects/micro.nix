@@ -5,7 +5,6 @@ imports = [ inputs.den.flakeModule ];
 	den.aspects.micro = {
 
 		nixos = { config, lib, pkgs, ... }: {
-			programs.micro = {
 
 			environment.sessionVariables = {
 				EDITOR = "micro";
