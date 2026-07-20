@@ -7,17 +7,10 @@
 		inputs.nixpkgs.follows = "nixpkgs"; # Standard follows syntax works here
 	};
 
-	imports = [
-		inputs.disko.nixosModules.disko
-	];
-
 
 	den.aspects.common.provides.storage.provides.disko = {
 
 		nixos = { ... }: {
-			imports = [
-			  inputs.disko.nixosModules.disko
-			];
 
 			#disko.enableConfig = true;
 		};
@@ -32,9 +25,6 @@
 			
 			__functor = self: { devicePath, ... }: { host, ... }: {
 
-					imports = [
-						inputs.disko.nixosModules.disko
-					];
 
 					disko.enableConfig = true; 
 
