@@ -4,31 +4,35 @@
 
 	flake-file.inputs.disko = {
 		url = "github:nix-community/disko";
-		inputs.nixpkgs.follows = "nixpkgs"; # Standard follows syntax works here
+		inputs.nixpkgs.follows = "nixpkgs";
 	};
 
+	# FIX: Inject the mapping into the flake output from inside the aspect!
+	# This avoids touching flake.nix while making diskoConfigurations universally visible.
+	flake.diskoConfigurations = lib.mapAttrs (name: hostConf: hostConf.config.disko.devices) den.hosts.x86_64-linux;
 
 	den.aspects.common.provides.storage.provides.disko = {
 
 		nixos = { ... }: {
-
-			#disko.enableConfig = true;
+			imports = [
+			  inputs.disko.nixosModules.disko
+			];
+			disko.enableConfig = true;
 		};
 
 		provides.mkPrimaryDrive = {
 
-			####includes = [ den.aspects.common._.storage._.disko ];
+			includes = [ den.aspects.common._.storage._.disko ];
 
-			__functor = self: { devicePath, ... }: { #### devicePath: /dev/disk/by-id/<ID>
+			__functor = self: { devicePath, ... }: {
 
 				nixos = { host, ... }: {
-			
-					disko.enableConfig = true; 
+
+					disko.enableConfig = true;
 
 					disko.devices = {
 					    disk = {
-					    
-					      primary-drive = {
+					      "${host.hostName}_disko_disk" = {
 					        type = "disk";
 					        device = devicePath;
 					        content = {
@@ -36,7 +40,7 @@
 					          partitions = {
 					          
 					            ESP = {
-					            	name = "ESP";
+					              name = "ESP";
 					              priority = 1;
 					              size = "1G";
 					              type = "EF00";
@@ -48,23 +52,20 @@
 					              };
 					            };
 					            
-					            root-volume = {
+					            "${host.hostName}_disko_part" = {
 					              size = "100%";
 					              content = {
 					                type = "btrfs";
 					                extraArgs = [ "-f" ]; 
 					                
 					                subvolumes = {
-					                
 					                  "/rootfs" = {
 					                    mountpoint = "/";
 					                  };
-
 					                  "/home" = {
 					                    mountOptions = [ "compress=zstd" ];
 					                    mountpoint = "/home";
 					                  };
-					        
 					                  "/nix" = {
 					                    mountOptions = [
 					                      "compress=zstd"
@@ -72,23 +73,19 @@
 					                    ];
 					                    mountpoint = "/nix";
 					                  };
-					                  
 					                  "/swap" = {
 					                    mountpoint = "/.swapvol";
 					                    swap = {
 					                      swapfile.size = "8G";
 					                    };
 					                  };
-					                  
 					                };
-					
 					                mountpoint = "/partition-root";
 					                swap = {
 					                  swapfile = {
 					                    size = "8G";
 					                  };
 					                };
-					                
 					              };
 					            };
 					          };
@@ -96,13 +93,8 @@
 					      };
 					    };
 					  };
-					
 				};
-
-			
 			};
-
 		};
-
 	};
 }
