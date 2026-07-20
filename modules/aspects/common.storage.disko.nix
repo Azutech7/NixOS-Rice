@@ -1,11 +1,11 @@
 { inputs, den, pkgs, lib, host, ... }: {
 
-imports = [ inputs.den.flakeModule ];
+	imports = [ inputs.den.flakeModule ];
 
-flake-file.inputs.disko = {
-			    url = "github:nix-community/disko";
-			    inputs.nixpkgs.follows = "nixpkgs"; # Standard follows syntax works here
-			  };
+	flake-file.inputs.disko = {
+		url = "github:nix-community/disko";
+		inputs.nixpkgs.follows = "nixpkgs"; # Standard follows syntax works here
+	};
 
 	den.aspects.common.provides.storage.provides.disko = {
 
@@ -14,22 +14,23 @@ flake-file.inputs.disko = {
 			  # Safely fall back to an empty module if disko isn't written to the flake yet
 			  (inputs.disko.nixosModules.disko or { })
 			];
+
+			disko.enableConfig = true;
 		};
 
 		provides.mkPrimaryDrive = {
 
-			includes = [ den.aspects.common._.storag._.disko ];
+			includes = [ den.aspects.common._.storage._.disko ];
 
 			__functor = self: { devicePath, ... }: { #### devicePath: /dev/disk/by-id/<ID>
 
-
 				nixos = { host, ... }: {
 
-					imports = [
-								  # Safely fall back to an empty module if disko isn't written to the flake yet
-								  (inputs.disko.nixosModules.disko or { })
-								];
-				
+					#imports = [
+					#	# Safely fall back to an empty module if disko isn't written to the flake yet
+					#	(inputs.disko.nixosModules.disko or { })
+					#];
+
 					disko.devices = {
 					    disk = {
 					    
