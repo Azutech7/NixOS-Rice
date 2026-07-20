@@ -10,6 +10,8 @@
 		inputs.nixpkgs.follows = "nixpkgs";
 	};
 
+	den.default.includes = [ { nixos = { ... }: { imports = [ inputs.disko.nixosModules.disko ]; }; } ];
+
 	den.aspects.common.provides.storage.provides.disko = {
 
 		nixos = { ... }: {
@@ -26,12 +28,9 @@
 
 			__functor = self: { devicePath, ... }: {
 
-				nixos = { host, ... }: {
-
-					disko.enableConfig = true;
-
-					flake.diskoConfigurations."${host.hostName}".disko.devices = config.disko.devices;
-
+				# FIX: Define the disko config directly at the flake level inside the functor!
+				# This handles multiple hosts dynamically based on their hostName.
+				flake.diskoConfigurations."${host.hostName}" = {
 					disko.devices = {
 					    disk = {
 					      "${host.hostName}_disko_disk" = {
@@ -95,6 +94,14 @@
 					      };
 					    };
 					  };
+				};
+
+				# Now point your NixOS target module directly back to the flake configuration
+				nixos = { config, host, ... }: {
+					disko.enableConfig = true;
+					
+					# Read the layout definitions dynamically from the flake scope we built above
+					disko.devices = config.diskoConfigurations."${host.hostName}".disko.devices;
 				};
 			};
 		};
