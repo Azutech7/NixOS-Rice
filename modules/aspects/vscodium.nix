@@ -11,7 +11,6 @@ imports = [ inputs.den.flakeModule ];
 
                 profiles.default.extensions = with pkgs.vscode-extensions; [
                     jnoortheen.nix-ide
-                    jeanp413.open-remote-ssh
                 ];
             };
 
