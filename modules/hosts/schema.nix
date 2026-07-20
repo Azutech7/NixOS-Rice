@@ -2,7 +2,12 @@
 
 	den.default.includes = [
 		den.batteries.hostname
-		{ nixos = { ... }: { system.stateVersion = "25.11"; }; }
+		{ nixos = { ... }: { 
+			imports = [
+				(inputs.disko.nixosModules.disko or {})
+			];
+			system.stateVersion = "25.11";
+		}; }
 	];
 
     den.schema.host = host: {
