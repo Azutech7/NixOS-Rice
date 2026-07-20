@@ -1,4 +1,4 @@
-{ inputs, den, pkgs, lib, host, ... }: {
+{ inputs, den, pkgs, lib, host, config, ... }: {
 
 	imports = [ inputs.den.flakeModule ];
 
