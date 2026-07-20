@@ -12,7 +12,7 @@ imports = [ inputs.den.flakeModule ];
 				fonts.fontconfig.enable = true;
 
 				fonts.packages = with pkgs; []; #TODO, make system-level theme module
-			}
+			};
 
 		homeManager = { config, pkgs, ... }: 
 			let
