@@ -3,7 +3,7 @@
 imports = [ inputs.den.flakeModule ];
 
     den.aspects.spotify-player = {
-        homeManager = { pkgs, ... }: {
+        homeManager = { pkgs, config, ... }: {
             
             programs.spotify-player = {
                 enable = true;
