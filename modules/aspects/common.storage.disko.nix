@@ -2,7 +2,7 @@
 
 	imports = [ 
 		inputs.den.flakeModule
-		inputs.disko.flakeModules.default
+		#inputs.disko.flakeModules.default
 	];
 
 	flake-file.inputs.disko = {
@@ -10,5 +10,5 @@
 		inputs.nixpkgs.follows = "nixpkgs";
 	};
 
-	den.default.includes = [ { nixos = { ... }: { imports = [ inputs.disko.nixosModules.disko ]; }; } ];
+	#den.default.includes = [ { nixos = { ... }: { imports = [ inputs.disko.nixosModules.disko ]; }; } ];
 }
