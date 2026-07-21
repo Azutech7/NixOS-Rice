@@ -1,4 +1,5 @@
-{
+{ inputs, den, pkgs, lib, host, ... }: {
+    
     imports = [
 		inputs.disko.nixosModules.disko
 	];
