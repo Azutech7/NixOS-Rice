@@ -36,7 +36,9 @@
 			azutech = {};
 		};
 
-		environment.systemPackages = with pkgs; [
+		nixos = { pkgs, inputs, ... }: {
+
+			environment.systemPackages = with pkgs; [
 				wget
 				git
 				neovim
@@ -79,6 +81,7 @@
 				cacert
 				openssl
 			];
+		};
 
 
 	};

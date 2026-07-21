@@ -1,9 +1,15 @@
 { inputs, den, pkgs, lib, host, ... }: {
 
     imports = [
-		#inputs.disko.nixosModules.disko
         inputs.disko.flakeModules.default
 	];
+
+    flake.nixosConfigurations.sanbar = {
+        imports = [
+            inputs.disko.nixosModules.disko
+            inputs.self.diskoConfigurations.sanbar
+        ]
+    };
 
     flake.diskoConfigurations.sanbar = {
         disko.devices = {
