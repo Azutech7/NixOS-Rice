@@ -8,7 +8,7 @@
         imports = [
             inputs.disko.nixosModules.disko
             inputs.self.diskoConfigurations.sanbar
-        ]
+        ];
     };
 
     flake.diskoConfigurations.sanbar = {
