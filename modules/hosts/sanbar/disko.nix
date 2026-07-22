@@ -1,17 +1,12 @@
-{ inputs, den, pkgs, lib, host, ... }: {
+{ inputs, ... }: {
 
-    imports = [
-        inputs.disko.flakeModules.default
-	];
-
-    flake.nixosConfigurations.sanbar = {
+    # Fix the duplicate swap configuration block inside your Btrfs block 
+    # and map it directly into den's NixOS aspect evaluation loop.
+    den.aspects.sanbar.nixos = {
         imports = [
             inputs.disko.nixosModules.disko
-            inputs.self.diskoConfigurations.sanbar
         ];
-    };
 
-    flake.diskoConfigurations.sanbar = {
         disko.devices = {
             disk = {
                 sanbar_disko_disk = {
@@ -20,54 +15,48 @@
                     content = {
                         type = "gpt";
                         partitions = {
-                            
                             ESP = {
                                 name = "ESP";
                                 priority = 1;
                                 size = "1G";
                                 type = "EF00";
                                 content = {
-                                type = "filesystem";
-                                format = "vfat";
-                                mountpoint = "/boot";
-                                mountOptions = [ "umask=0077" ];
+                                    type = "filesystem";
+                                    format = "vfat";
+                                    mountpoint = "/boot";
+                                    mountOptions = [ "umask=0077" ];
                                 };
                             };
-                            
                             sanbar_disko_part = {
                                 size = "100%";
                                 content = {
-                                type = "btrfs";
-                                extraArgs = [ "-f" ]; 
-                                
-                                subvolumes = {
-                                    "/rootfs" = {
-                                        mountpoint = "/";
-                                    };
-                                    "/home" = {
-                                        mountOptions = [ "compress=zstd" ];
-                                        mountpoint = "/home";
-                                    };
-                                    "/nix" = {
-                                        mountOptions = [
-                                            "compress=zstd"
-                                            "noatime"
-                                        ];
-                                        mountpoint = "/nix";
-                                    };
-                                    "/swap" = {
-                                        mountpoint = "/.swapvol";
-                                        swap = {
-                                            swapfile.size = "8G";
+                                    type = "btrfs";
+                                    extraArgs = [ "-f" ]; 
+                                    mountpoint = "/partition-root";
+                                    
+                                    subvolumes = {
+                                        "/rootfs" = {
+                                            mountpoint = "/";
+                                        };
+                                        "/home" = {
+                                            mountOptions = [ "compress=zstd" ];
+                                            mountpoint = "/home";
+                                        };
+                                        "/nix" = {
+                                            mountOptions = [
+                                                "compress=zstd"
+                                                "noatime"
+                                            ];
+                                            mountpoint = "/nix";
+                                        };
+                                        "/swap" = {
+                                            mountpoint = "/.swapvol";
+                                            swap = {
+                                                swapfile.size = "8G";
+                                            };
                                         };
                                     };
-                                };
-                                mountpoint = "/partition-root";
-                                    swap = {
-                                        swapfile = {
-                                            size = "8G";
-                                        };
-                                    };
+                                    # The nested, duplicate raw swap block causing the loop has been deleted
                                 };
                             };
                         };
