@@ -2,7 +2,11 @@
 
 	den.default.includes = [
 		den.batteries.hostname
-		{ nixos = { ... }: { system.stateVersion = "25.11"; }; }
+		{ nixos = { ... }: { 
+			system.stateVersion = "25.11";
+			nixpkgs.config.allowUnfree = true;
+			nix.settings.experimental-features = [ "nix-command" "flakes" ];
+		}; }
 	];
 
     den.schema.host = host: {
