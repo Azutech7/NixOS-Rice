@@ -112,7 +112,9 @@ imports = [ inputs.den.flakeModule ];
 
 				config.fonts.fontconfig.enable = true;
 
-				config.home.packages = with pkgs; [] ++ cfg.font.package;
+				config.home.packages = with pkgs; [
+  					cfg.font.package
+				];
 
 				config.home.sessionVariables = {
 					XCURSOR_THEME = cfg.cursor.name;
