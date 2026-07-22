@@ -1,9 +1,9 @@
 { inputs, den, pkgs, lib, host, config, ... }: {
 
-	imports = [ 
-		inputs.den.flakeModule
+	#imports = [ 
+		#inputs.den.flakeModule
 		#inputs.disko.flakeModules.default
-	];
+	#];
 
 	flake-file.inputs.disko = {
 		url = "github:nix-community/disko";
