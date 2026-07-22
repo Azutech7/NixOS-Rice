@@ -1,4 +1,5 @@
-{
+{ inputs, den, pkgs, lib, host, ... }: {
+	imports = [ inputs.den.flakeModule ];
 
     # Fix the duplicate swap configuration block inside your Btrfs block 
     # and map it directly into den's NixOS aspect evaluation loop.
