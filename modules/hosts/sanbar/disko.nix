@@ -3,12 +3,12 @@
 
     # Fix the duplicate swap configuration block inside your Btrfs block 
     # and map it directly into den's NixOS aspect evaluation loop.
-    den.aspects.sanbar.nixos = { den, pkgs, lib, host, ... }: {
+    den.aspects.sanbar.nixos = { inputs, den, pkgs, lib, host, ... }: {
         imports = [
             inputs.disko.nixosModules.disko
         ];
 
-        #boot.loader.grub.enable = lib.mkForce false; #DOES NOT SUPPORT GRUB
+        boot.loader.grub.enable = lib.mkForce false; #DOES NOT SUPPORT GRUB
 
         disko.devices = {
             disk = {
