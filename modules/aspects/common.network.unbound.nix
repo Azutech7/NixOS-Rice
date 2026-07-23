@@ -8,6 +8,7 @@ imports = [ inputs.den.flakeModule ];
 			services.unbound = {
 				enable = true;
 				enableRootTrustAnchor = true;
+				
 				settings = {
 					server = {
 						interface = [ "127.0.0.1" ];
@@ -16,14 +17,20 @@ imports = [ inputs.den.flakeModule ];
 						
 						do-ip4 = true;
 						do-ip6 = false;
-
 						prefetch = true;
-
 						harden-dnssec-stripped = true;
 						qname-minimisation-strict = true;
+
+						do-not-query-localhost = false;
 					};
+
+					forward-zone = [{
+						name = ".";
+						forward-addr = [ "127.0.0.1@5353" ];
+					}];
 				};
 			};
+
 			
 			networking = {
 				nameservers = lib.mkForce [ "127.0.0.1" ];

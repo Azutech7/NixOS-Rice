@@ -3,6 +3,10 @@
 imports = [ inputs.den.flakeModule ];
 
 	den.aspects.hyprland = {
+
+		includes = [
+			den.aspects.wayland-clipboard
+		];
 	
 		nixos = { pkgs, ... }: {
 			programs.hyprland = {
@@ -118,7 +122,7 @@ imports = [ inputs.den.flakeModule ];
 			      };
 			
 			      dwindle = {
-			        pseudotile = true;
+			        #pseudotile = true; #sad to see it go
 			        preserve_split = true;
 			      };
 			

@@ -18,8 +18,8 @@ imports = [ inputs.den.flakeModule ];
 				    require_nolog = true;
 
 					ipv6_servers = false;
-				  };
 				};
+			};
 
 			networking = {
 				nameservers = lib.mkForce [ "127.0.0.1" ];
