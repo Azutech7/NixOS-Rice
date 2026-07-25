@@ -15,7 +15,7 @@
 				config.allowUnfree = true;
 			};
 
-			_module.args.inputs = inputs;
+			#_module.args.inputs = inputs;
 
 			time.timeZone = lib.mkDefault "America/Los_Angeles";
 		}; }

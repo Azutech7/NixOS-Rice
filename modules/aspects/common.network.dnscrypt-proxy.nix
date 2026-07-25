@@ -3,7 +3,7 @@
 imports = [ inputs.den.flakeModule ];
 
 	den.aspects.common.provides.network.provides.dnscrypt-proxy = {
-		nixos = { ... }: {
+		nixos = { lib, ... }: {
 
 			services.dnscrypt-proxy = {
 				  enable = true;

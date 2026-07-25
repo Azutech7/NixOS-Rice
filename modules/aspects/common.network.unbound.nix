@@ -3,7 +3,7 @@
 imports = [ inputs.den.flakeModule ];
 
 	den.aspects.common.provides.network.provides.unbound = {
-		nixos = { ... }: {
+		nixos = { lib, ... }: {
 
 			services.unbound = {
 				enable = true;

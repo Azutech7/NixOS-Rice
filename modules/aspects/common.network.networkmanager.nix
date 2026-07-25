@@ -3,7 +3,7 @@
 imports = [ inputs.den.flakeModule ];
 
 	den.aspects.common._.network._.networkmanager = {
-		nixos = { ... }: {
+		nixos = { lib, ... }: {
 			networking = {
 				networkmanager = {
 					enable = true;
