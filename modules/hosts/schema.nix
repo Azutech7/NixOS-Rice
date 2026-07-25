@@ -1,41 +1,21 @@
 { inputs, den, lib, config, ... }: {
 
-	imports = [ inputs.den.flakeModule ];
+  imports = [ inputs.den.flakeModule ];
 
-	den.default.includes = [
-		den.batteries.hostname
-		{ nixos = { inputs, den, lib, config, ... }: { 
-			system.stateVersion = "25.11";
+  # Use the schema approach to inherit attributes dynamically from the host context
+  den.schema.host = host: {
+    nixos = { lib, ... }: {
+      system.stateVersion = "25.11";
+      nixpkgs.config.allowUnfree = true;
+      nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-			nixpkgs.config.allowUnfree = true;
-
-			nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-			den.nixpkgs = {
-				source = inputs.nixpkgs;
-				system = "x86_64-linux"; # Maps "x86_64-linux" directly, find better way
-				config.allowUnfree = true;
-			};
-
-			_module.args.inputs = inputs;
-
-			time.timeZone = lib.mkDefault "America/Los_Angeles";
-		}; }
-	];
-
-    #den.schema.host = host: {
-	#	
-	#	nixos = { lib, inputs, ... }: {
-	#		den.nixpkgs = {
-	#			source = inputs.nixpkgs;
-	#			system = host.system; # Maps "x86_64-linux" directly
-	#			config.allowUnfree = true;
-	#		};
-	#	 
-	#		_module.args.inputs = inputs;
-	#		
-	#		nix.settings.experimental-features = [ "nix-command" "flakes" ];
-	#		time.timeZone = lib.mkDefault "America/Los_Angeles";
-	#	};
-	#};
+      den.nixpkgs = {
+        source = inputs.nixpkgs;
+        system = host.system; # Cleanly resolves to "x86_64-linux" automatically via context
+        config.allowUnfree = true;
+      };
+      
+      time.timeZone = lib.mkDefault "America/Los_Angeles";
+    };
+  };
 }
