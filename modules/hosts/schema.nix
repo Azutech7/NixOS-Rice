@@ -11,7 +11,7 @@
 
 			den.nixpkgs = {
 				source = inputs.nixpkgs;
-				system = host.system; # Maps "x86_64-linux" directly
+				system = "x86_64-linux"; # Maps "x86_64-linux" directly, find better way
 				config.allowUnfree = true;
 			};
 
