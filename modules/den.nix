@@ -19,7 +19,7 @@
       		inputs.nixpkgs-lib.follows = "nixpkgs";
     	};
 		import-tree.url = "github:vic/import-tree";
-		nixpkgs.url = "https://channels.nixos.org/nixpkgs-26.05/nixexprs.tar.xz";
+		nixpkgs.url = "https://channels.nixos.org/nixos-26.05/nixexprs.tar.xz";
 	};
 
 }
