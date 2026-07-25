@@ -21,12 +21,9 @@ imports = [ inputs.den.flakeModule ];
 				};
 			};
 
-			networking = {
+			networking.networkmanager = {
 				nameservers = lib.mkForce [ "127.0.0.1" ];
-
-				networkmanager = {
-					dns = "none";
-				};
+				dns = lib.mkForce "none";
 			};
 
 		};

@@ -14,6 +14,12 @@
 			url = "github:nix-community/home-manager";
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
+		flake-parts = {
+      		url = "github:hercules-ci/flake-parts";
+      		inputs.nixpkgs-lib.follows = "nixpkgs";
+    	};
+		import-tree.url = "github:vic/import-tree";
+		nixpkgs.url = "https://channels.nixos.org/nixpkgs-26.05/nixexprs.tar.xz";
 	};
 
 }

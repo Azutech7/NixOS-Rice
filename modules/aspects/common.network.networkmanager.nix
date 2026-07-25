@@ -13,6 +13,9 @@ imports = [ inputs.den.flakeModule ];
 
 				enableIPv6 = false;
 				preferIPv4 = true;
+
+				nameservers = lib.mkDefault [ "1.1.1.1" "8.8.8.8" ];
+				dns = lib.mkDefault "default";
 			};
 		};
 	};
