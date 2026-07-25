@@ -1,5 +1,7 @@
 { inputs, den, lib, config, ... }: {
 
+	imports = [ inputs.den.flakeModule ];
+
 	den.default.includes = [ { homeManager = { ... }: { home.stateVersion = "25.11"; }; } ];
 	
     den.schema.user = user: {

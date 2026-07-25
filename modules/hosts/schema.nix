@@ -1,5 +1,7 @@
 { inputs, den, lib, config, ... }: {
 
+	imports = [ inputs.den.flakeModule ];
+
 	den.default.includes = [
 		den.batteries.hostname
 		{ nixos = { inputs, den, lib, config, ... }: { 
