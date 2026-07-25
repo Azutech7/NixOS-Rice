@@ -10,7 +10,7 @@
 
         boot.loader.grub.enable = lib.mkForce false; #DOES NOT SUPPORT GRUB
 
-        disko.devices = {
+        disko.devices = lib.mkIf true {
             disk = {
                 sanbar_disko_disk = {
                     type = "disk";
