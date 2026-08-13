@@ -4,10 +4,6 @@
 	den.hosts.x86_64-linux.sanbar = {
 
 		includes = [
-			#(den.aspects.common._.storage._.disko._.mkPrimaryDrive { 
-			#	devicePath = "/dev/disk/by-id/wwn-500a0751e9aba137";
-			#})
-			
 			den.aspects.common._.audio._.pipewire
 			den.aspects.common._.boot
 			den.aspects.common._.hardware._.automatic-compatability
@@ -30,6 +26,7 @@
 			den.aspects.common._.laptop._.battery-optimizations
 
 			den.aspects.ly
+			den.aspects.captive-browser
 		];
 
 		users = {
