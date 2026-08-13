@@ -3,11 +3,17 @@
 imports = [ inputs.den.flakeModule ];
 
     den.aspects.common._.audio._.pipewire = {
-        nixos = { ... }: {
+        nixos = { pkgs, ... }: {
+
             services.pipewire = {
             	enable = true;
             	pulse.enable = true;
             };
+
+            environment.systemPackages = with pkgs; [
+                wiremix
+            ];
         };
+
     };
 }
